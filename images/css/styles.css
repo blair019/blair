@@ -1,0 +1,80 @@
+body {
+
+  text-align: center;
+ background-image: linear-gradient(to right,black, lightgreen);
+
+}
+
+h1 {
+  margin-top: 0;
+
+}
+
+h3{
+font-family: 'Montserrat Alternates', sans-serif;
+}
+
+
+.top-container{
+padding-top: 20px;
+background-image: url('../background.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+height: 700px;
+}
+.blair{
+  font-size: 90px;
+  font-family: 'Sacramento',cursive;
+  color: #d2f8d2;
+ margin-bottom: 0;
+}
+.programmer{
+  font-size: 25px;
+  font-family: 'Montserrat Alternates',sans-serif;
+  color: #d2f8d2;
+    margin: 0;
+}
+.profile-image{
+  width: 230px;
+  margin: 0;
+}
+.welcome-to{
+
+  width: 590px;
+  position: relative;
+  margin-left: 350px;
+  margin-top: 0;
+  margin-bottom:0;
+}
+
+
+.welcome{
+
+  padding-top: 40px;
+  font-family: 'Sacramento',cursive;
+  color: #0f211a;
+  font-size: 50px;
+  margin-top: 0;
+}
+
+.oreo{
+  font-size: 20px;
+  color: #0f211a;
+  font-family: 'Source Code Pro', monospace;
+}
+.skill{
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 30px;
+}
+
+.middle-container{
+
+}
+
+.design{
+  height: 250px;
+}
+
+.trouble{
+  height: 250px;
+}
