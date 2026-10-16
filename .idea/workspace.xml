@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79506dfb-cb35-4ca9-8ded-59e8be5e30e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/vite-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Preloader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1791991276248</updated>
       <workItem from="1791991277361" duration="13163000" />
-      <workItem from="1792096195802" duration="4541000" />
+      <workItem from="1792096195802" duration="4717000" />
     </task>
     <servers />
   </component>

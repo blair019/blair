@@ -75,7 +75,7 @@ export default function Preloader() {
 
             <div className={styles.footer}>
                 <span>BLAIR © {new Date().getFullYear()}</span>
-                <span>PORTFOLIO / FULL-STACK DEVELOPER</span>
+                <span>FULL-STACK DEVELOPER</span>
             </div>
         </div>
     );
