@@ -1,0 +1,903 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+    font-family: "DM Sans", Arial, sans-serif;
+    color: #ffffff;
+    background: #0c1011;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--project-accent, #ffffff);
+    outline-offset: 5px;
+}
+
+/* ========================================
+   PORTFOLIO
+======================================== */
+
+.portfolio {
+    --project-accent: #f2c8b7;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100svh;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #0c1011;
+    color: #ffffff;
+}
+
+/* ========================================
+   BACKGROUND
+======================================== */
+
+.portfolio-backgrounds {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.portfolio-background {
+    position: absolute;
+    inset: 0;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    opacity: 0;
+    transform: none;
+
+    transition: none;
+}
+
+.portfolio-background.is-active {
+    opacity: 1;
+    transform: none;
+}
+
+/*
+   This gradient must match the final
+   expansion gradient exactly.
+*/
+
+.portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(7, 10, 11, 0.93) 0%,
+                    rgba(7, 10, 11, 0.75) 33%,
+                    rgba(7, 10, 11, 0.23) 85%
+            ),
+            linear-gradient(
+                    0deg,
+                    rgba(7, 10, 11, 0.94) 0%,
+                    transparent 63%
+            );
+}
+
+.portfolio-grain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    pointer-events: none;
+    opacity: 0.1;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.45'/%3E%3C/svg%3E");
+}
+
+/* ========================================
+   SHARED-IMAGE TRANSITION
+======================================== */
+
+.project-expansion {
+    position: fixed;
+
+    left: var(--expand-left);
+    top: var(--expand-top);
+
+    width: var(--expand-width);
+    height: var(--expand-height);
+
+    z-index: 4;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    border-radius: 9px;
+
+    transform: translateZ(0);
+
+    will-change:
+            left,
+            top,
+            width,
+            height,
+            border-radius;
+
+    transition:
+            left 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+            top 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+            width 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+            height 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-radius 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-expansion.is-expanded {
+    left: 0;
+    top: 0;
+
+    width: 100vw;
+    height: 100svh;
+
+    border-radius: 0;
+}
+
+/*
+   No transform or zoom on this image.
+
+   When the expansion reaches full size,
+   its background-position and background-size
+   match .portfolio-background.
+*/
+
+.project-expansion-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--expand-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*
+   The dark overlay gradually appears
+   during the expansion.
+
+   At the end, it exactly matches
+   .portfolio-overlay.
+*/
+
+.project-expansion-shade {
+    position: absolute;
+    inset: 0;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(7, 10, 11, 0.93) 0%,
+                    rgba(7, 10, 11, 0.75) 33%,
+                    rgba(7, 10, 11, 0.23) 85%
+            ),
+            linear-gradient(
+                    0deg,
+                    rgba(7, 10, 11, 0.94) 0%,
+                    transparent 63%
+            );
+
+    opacity: 0;
+
+    transition:
+            opacity 850ms cubic-bezier(0.22, 1, 0.36, 1)
+            250ms;
+}
+
+.project-expansion.is-expanded
+.project-expansion-shade {
+    opacity: 1;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.portfolio-header {
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 35px 5%;
+}
+
+.portfolio-logo {
+    color: #ffffff;
+
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.08em;
+
+    text-decoration: none;
+}
+
+.portfolio-logo span {
+    color: var(--project-accent);
+    transition: color 400ms ease;
+}
+
+.portfolio-navigation {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+.portfolio-navigation a {
+    color: rgba(255, 255, 255, 0.83);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+
+    text-decoration: none;
+    transition: color 200ms ease;
+}
+
+.portfolio-navigation a:hover {
+    color: var(--project-accent);
+}
+
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.portfolio-main {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    width: 100%;
+    padding: 50px 7% 70px;
+}
+
+.portfolio-content {
+    width: 100%;
+    max-width: 1200px;
+
+    transform-origin: bottom left;
+
+    will-change: opacity, transform;
+
+    transition:
+            opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Original content exits before replacement */
+
+.portfolio-content.content-exit {
+    opacity: 0;
+
+    transform:
+            translate3d(-25px, -25px, 0);
+
+    transition:
+            opacity 280ms ease-in,
+            transform 280ms ease-in;
+
+    pointer-events: none;
+}
+
+/*
+   New project is prepared invisibly
+   at the bottom-left.
+*/
+
+.portfolio-content.content-prepare {
+    opacity: 0;
+
+    transform:
+            translate3d(-90px, 110px, 0);
+
+    transition: none;
+
+    pointer-events: none;
+}
+
+/*
+   New content moves diagonally
+   upward from bottom-left.
+*/
+
+.portfolio-content.content-enter,
+.portfolio-content.content-visible {
+    opacity: 1;
+
+    transform:
+            translate3d(0, 0, 0);
+}
+
+.portfolio-content.content-enter {
+    transition:
+            opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ========================================
+   EYEBROW
+======================================== */
+
+.portfolio-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    color: var(--project-accent);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+}
+
+.eyebrow-line {
+    display: block;
+    width: 35px;
+    height: 1px;
+    background: currentColor;
+}
+
+/* ========================================
+   TITLE
+======================================== */
+
+.portfolio-title-wrapper {
+    overflow: hidden;
+    padding: 0.07em 0;
+}
+
+.portfolio-title {
+    max-width: 1200px;
+    margin: 0;
+
+    font-size: clamp(65px, 10vw, 170px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.095em;
+    text-transform: uppercase;
+
+    overflow-wrap: anywhere;
+}
+
+.title-period {
+    color: var(--project-accent);
+}
+
+/* ========================================
+   PROJECT INFORMATION
+======================================== */
+
+.portfolio-category {
+    margin: 27px 0 13px;
+
+    color: var(--project-accent);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+}
+
+.portfolio-description {
+    max-width: 420px;
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.75;
+}
+
+.portfolio-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+
+    margin-top: 30px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+
+    text-decoration: none;
+}
+
+.project-link-icon {
+    display: grid;
+    place-items: center;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    transition:
+            color 200ms ease,
+            background 200ms ease,
+            transform 200ms ease;
+}
+
+.portfolio-project-link:hover
+.project-link-icon {
+    color: #101313;
+    background: #ffffff;
+    transform: rotate(45deg);
+}
+
+.portfolio-coming-soon {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    margin-top: 32px;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.coming-soon-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--project-accent);
+    box-shadow: 0 0 15px var(--project-accent);
+}
+
+/* ========================================
+   FOOTER AND PROJECT CARDS
+======================================== */
+
+.portfolio-footer {
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 25px;
+
+    width: 100%;
+    padding: 25px 5% 42px;
+}
+
+.portfolio-counter {
+    min-width: 125px;
+}
+
+.counter-current {
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.counter-divider {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 14px;
+}
+
+.counter-caption {
+    display: block;
+    margin-top: 8px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.portfolio-project-cards {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    gap: 14px;
+
+    min-width: 0;
+}
+
+.portfolio-project-card {
+    position: relative;
+
+    width: clamp(135px, 18vw, 240px);
+    height: clamp(105px, 11vw, 145px);
+
+    flex: 0 1 auto;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 9px;
+
+    background-color: #1b2224;
+    background-size: cover;
+    background-position: center;
+
+    color: #ffffff;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+            transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            border-color 250ms ease,
+            box-shadow 250ms ease;
+}
+
+.portfolio-project-card:hover:not(:disabled) {
+    transform: translateY(-10px);
+}
+
+.portfolio-project-card.is-active {
+    border: 2px solid var(--card-accent);
+    transform: translateY(-5px);
+
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-project-card:disabled {
+    cursor: wait;
+}
+
+.project-card-shade {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.88),
+            rgba(0, 0, 0, 0.08) 80%
+    );
+}
+
+.project-card-number {
+    position: absolute;
+    top: 13px;
+    left: 14px;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.project-card-name {
+    position: absolute;
+    right: 12px;
+    bottom: 13px;
+    left: 14px;
+
+    font-size: clamp(11px, 1vw, 15px);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+}
+
+/* ========================================
+   ARROW CONTROLS
+======================================== */
+
+.portfolio-controls {
+    display: flex;
+    gap: 9px;
+    padding-bottom: 2px;
+}
+
+.portfolio-controls button {
+    display: grid;
+    place-items: center;
+
+    width: 47px;
+    height: 47px;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+            background 200ms ease,
+            color 200ms ease;
+}
+
+.portfolio-controls button:hover:not(:disabled) {
+    background: #ffffff;
+    color: #111111;
+}
+
+.portfolio-controls button:disabled {
+    cursor: wait;
+    opacity: 0.55;
+}
+
+/* ========================================
+   PROGRESS BAR
+======================================== */
+
+.portfolio-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+
+    height: 3px;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.portfolio-progress-fill {
+    height: 100%;
+    background: var(--project-accent);
+
+    transition:
+            width 650ms ease,
+            background 400ms ease;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1024px) {
+    .portfolio-header {
+        padding: 28px 5%;
+    }
+
+    .portfolio-main {
+        padding: 60px 6%;
+    }
+
+    .portfolio-title {
+        font-size: clamp(65px, 11vw, 120px);
+    }
+
+    .portfolio-footer {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .portfolio-counter {
+        width: 100%;
+    }
+
+    .portfolio-project-cards {
+        justify-content: flex-start;
+    }
+
+    .portfolio-project-card {
+        width: clamp(140px, 25vw, 210px);
+        height: 125px;
+    }
+
+    .portfolio-controls {
+        margin-left: auto;
+    }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 640px) {
+    .portfolio {
+        min-height: 100svh;
+    }
+
+    .portfolio-header {
+        padding: 23px 22px;
+    }
+
+    .portfolio-logo {
+        font-size: 20px;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+
+        border: 0;
+        background: none;
+        color: #ffffff;
+
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+
+        cursor: pointer;
+    }
+
+    .portfolio-navigation {
+        position: absolute;
+        top: 65px;
+        right: 20px;
+        left: 20px;
+
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+
+        padding: 25px;
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+
+        background: rgba(15, 20, 21, 0.96);
+        backdrop-filter: blur(20px);
+    }
+
+    .portfolio-navigation.is-open {
+        display: flex;
+    }
+
+    .portfolio-main {
+        align-items: center;
+        min-height: 390px;
+
+        padding: 55px 23px 45px;
+    }
+
+    .portfolio-eyebrow {
+        margin-bottom: 22px;
+
+        font-size: 9px;
+        letter-spacing: 0.16em;
+    }
+
+    .eyebrow-line {
+        width: 24px;
+    }
+
+    .portfolio-title {
+        font-size: clamp(54px, 13vw, 86px);
+        letter-spacing: -0.09em;
+    }
+
+    .portfolio-category {
+        margin-top: 23px;
+        font-size: 9px;
+        line-height: 1.6;
+    }
+
+    .portfolio-description {
+        max-width: 340px;
+        font-size: 13px;
+    }
+
+    .portfolio-footer {
+        align-items: center;
+        gap: 15px;
+
+        padding: 10px 18px 30px;
+    }
+
+    .portfolio-counter {
+        width: 100%;
+    }
+
+    .counter-current {
+        font-size: 28px;
+    }
+
+    .portfolio-project-cards {
+        gap: 9px;
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding: 8px 0 12px;
+
+        scrollbar-width: none;
+    }
+
+    .portfolio-project-cards::-webkit-scrollbar {
+        display: none;
+    }
+
+    .portfolio-project-card {
+        flex: 0 0 145px;
+        width: 145px;
+        height: 105px;
+    }
+
+    .portfolio-controls {
+        margin-left: auto;
+    }
+
+    .portfolio-controls button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .portfolio-overlay,
+    .project-expansion-shade {
+        background:
+                linear-gradient(
+                        90deg,
+                        rgba(7, 10, 11, 0.87),
+                        rgba(7, 10, 11, 0.4)
+                ),
+                linear-gradient(
+                        0deg,
+                        rgba(7, 10, 11, 0.96),
+                        transparent 72%
+                );
+    }
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
