@@ -4,6 +4,7 @@ import ExperienceSection from "./sections/ExperienceSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import ContactSection from "./sections/ContactSection";
 import Preloader from "./components/Preloader";
+import SelectedWorkSection from "./sections/SelectedWorkSection.tsx";
 
 export default function App() {
     return (
@@ -11,7 +12,9 @@ export default function App() {
             <Preloader />
 
             <CinematicIntro />
+            <SelectedWorkSection />
             <ProjectsSection />
+
             <ExperienceSection />
             <ContactSection />
         </>

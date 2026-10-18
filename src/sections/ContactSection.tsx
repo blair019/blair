@@ -136,7 +136,7 @@ export default function ContactSection() {
                     </div>
 
                     <div className={styles.formArea}>
-                        <p className={styles.columnLabel}>02 / DROP ME A MESSAGE</p>
+                        <p className={styles.columnLabel}>03 / DROP ME A MESSAGE</p>
 
                         <form onSubmit={handleSubmit} className={styles.form}>
                             <div className={styles.field}>
